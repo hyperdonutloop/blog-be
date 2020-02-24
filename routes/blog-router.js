@@ -48,5 +48,23 @@ router.put('/:id', (req, res) => {
     })
 })
 
+//delete a post
+
+router.delete('/:id', (req, res) => {
+  const { id} = req.params;
+
+  Posts.remove(id)
+    .then(deleted => {
+      if (deleted) {
+        res.json({ message: 'Post has been destroyed 💀' })
+      } else {
+        res.status(404).json({ message: 'Could not find post with the given id' })
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ message: 'Faled to delete post', error })
+    })
+})
+
 
 module.exports = router;
