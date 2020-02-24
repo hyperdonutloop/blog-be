@@ -15,7 +15,6 @@ router.get('/', authenticate, (req, res) => {
 
 //create a post
 router.post('/', (req, res) => {
-  // const { id } = req.params;
   let postInfo = req.body;
   Posts.add(postInfo)
     .then(added => {
