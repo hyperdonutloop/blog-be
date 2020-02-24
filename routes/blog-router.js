@@ -27,8 +27,26 @@ router.post('/', (req, res) => {
 
 })
 
+//edit a post
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
 
-
+  Posts.findById(id)
+    .then(updatedPost => {
+      if(updatedPost) {
+        Posts.update(changes, id)
+          .then(updatedPost => {
+            res.json(updatedPost);
+          })
+      } else {
+        res.status(404).json({ message: 'Could not find Post with the given id', error })
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ message: 'Failed to update Post', error })
+    })
+})
 
 
 module.exports = router;
