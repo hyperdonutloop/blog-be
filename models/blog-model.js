@@ -29,14 +29,6 @@ function findById(id) {
   .first();
 }
 
-async function add(post) {
-  const [added] = await db('posts')
-  .insert(post)
-  .returning('*');
-
-  return added;
-}
-
 async function update(post, id) {
   await db('posts')
   .where({ id: id })
