@@ -13,6 +13,23 @@ router.get('/', authenticate, (req, res) => {
     })
 });
 
+//gets a post by an id
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  Posts.findById(id)
+    .then(post => {
+      if (post) {
+        res.json(post)
+      } else {
+        res.status(404).json({ message: 'Could not find post with the specified id' })
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ message: 'Failed to get post', error })
+    })
+  
+})
+
 //create a post
 router.post('/', (req, res) => {
   let postInfo = req.body;
