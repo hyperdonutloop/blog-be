@@ -44,7 +44,7 @@ function signToken(user) {
     user: user.username,
   };
 
-  const secret = process.env.JWT_SECRET || 'cookies'
+  const secret = process.env.JWT_SECRET
   const options = {
     expiresIn: '1 day',
   }
